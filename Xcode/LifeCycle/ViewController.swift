@@ -11,18 +11,28 @@ import Util
 
 class ViewController: UIViewController {
     @IBOutlet weak var backgroundStatusLabel: UILabel!
+    @IBOutlet weak var lowPowerModeLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateBackgroundStatusLabel()
+        updateLowPowerModeLabel()
     }
 
     private func updateBackgroundStatusLabel() {
         backgroundStatusLabel.text = UIApplication.shared.backgroundRefreshStatus.description
     }
 
-    @IBAction func updateDidTap(_ sender: UIButton) {
+    private func updateLowPowerModeLabel() {
+        lowPowerModeLabel.text = ProcessInfo.processInfo.isLowPowerModeEnabled.description
+    }
+
+    @IBAction func updateBackgroundRefreshStatusDidTap(_ sender: UIButton) {
         updateBackgroundStatusLabel()
+    }
+
+    @IBAction func updateLowPowerModeEnabledDidTap(_ sender: UIButton) {
+        updateLowPowerModeLabel()
     }
 }
 

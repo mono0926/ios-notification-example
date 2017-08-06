@@ -101,6 +101,7 @@ public struct Logger {
                                                   fileName: fileName,
                                                   lineNumber: lineNumber) else { return }
         os_log("%@", log: log, type: logType, output)
+//        NSLog("[NSLog] %@", output)
     }
 
     static func buildOutput(_ message: @autoclosure () ->  Any?,

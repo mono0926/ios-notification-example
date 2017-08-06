@@ -51,9 +51,9 @@ playground.xcworkspace
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
+Xcode/Carthage/Checkouts
 
-Carthage/Build
+Xcode/Carthage/Build
 
 # fastlane
 #
@@ -71,3 +71,4 @@ ApnsPublisher/.build
 ApnsPublisher/Packages
 ApnsPublisher/*.xcodeproj
 *.p8
+

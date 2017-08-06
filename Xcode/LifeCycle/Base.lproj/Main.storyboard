@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,40 +18,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v0L-Ll-xNc">
-                                <rect key="frame" x="85.5" y="298" width="204" height="71"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Rs7-Iz-hgB">
+                                <rect key="frame" x="85.5" y="252.5" width="204" height="162"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="backgroundRefreshStatus:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qb-Bn-f1i">
-                                        <rect key="frame" x="0.0" y="0.0" width="204" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATUS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIN-TK-HIA">
-                                        <rect key="frame" x="0.0" y="20.5" width="204" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txj-YK-lii">
-                                        <rect key="frame" x="0.0" y="41" width="204" height="30"/>
-                                        <state key="normal" title="Update"/>
-                                        <connections>
-                                            <action selector="updateDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eOt-uH-oLl"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v0L-Ll-xNc">
+                                        <rect key="frame" x="0.0" y="0.0" width="204" height="71"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="backgroundRefreshStatus:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qb-Bn-f1i">
+                                                <rect key="frame" x="0.0" y="0.0" width="204" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATUS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LIN-TK-HIA">
+                                                <rect key="frame" x="0.0" y="20.5" width="204" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txj-YK-lii">
+                                                <rect key="frame" x="0.0" y="41" width="204" height="30"/>
+                                                <state key="normal" title="Update"/>
+                                                <connections>
+                                                    <action selector="updateBackgroundRefreshStatusDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8JH-3y-tIn"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SAy-ch-hDT">
+                                        <rect key="frame" x="0.0" y="91" width="204" height="71"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lowPowerModeEnabled:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3G-Ae-xIW">
+                                                <rect key="frame" x="0.0" y="0.0" width="204" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STATUS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ooI-Dr-WAf">
+                                                <rect key="frame" x="0.0" y="20.5" width="204" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRD-TV-j3A">
+                                                <rect key="frame" x="0.0" y="41" width="204" height="30"/>
+                                                <state key="normal" title="Update"/>
+                                                <connections>
+                                                    <action selector="updateLowPowerModeEnabledDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KPt-eF-ZOl"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v0L-Ll-xNc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YRB-FV-CK5"/>
-                            <constraint firstItem="v0L-Ll-xNc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="hMh-tM-SXf"/>
+                            <constraint firstItem="Rs7-Iz-hgB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BiR-PQ-iiV"/>
+                            <constraint firstItem="Rs7-Iz-hgB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sJr-iA-5S0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="backgroundStatusLabel" destination="LIN-TK-HIA" id="5aA-Es-zBC"/>
+                        <outlet property="lowPowerModeLabel" destination="ooI-Dr-WAf" id="TVf-kN-e1l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
