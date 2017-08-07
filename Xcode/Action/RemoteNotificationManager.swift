@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import UserNotifications
-import RxSwift
 import Util
 
 public protocol RemoteNotificationManagerProtocol {
@@ -47,6 +46,7 @@ class RemoteNotificationManager: NSObject, RemoteNotificationManagerProtocol {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
+        registerCategories()
     }
 
     func application(_ application: UIApplication,
@@ -74,37 +74,65 @@ class RemoteNotificationManager: NSObject, RemoteNotificationManagerProtocol {
         // ここで実際にやりたいバックグラウンド処理を挟んで、終わったら以下を適切な引数で呼ぶ
         completionHandler(.newData)
     }
+
+    func registerCategories() {
+        // オプション省略
+        let action1 = UNNotificationAction(identifier: "action1",
+                                           title: "title1")
+        // オプションを1つ指定
+        let action2 = UNNotificationAction(identifier: "action2",
+                                           title: "title2",
+                                           options: .authenticationRequired)
+        // オプションを複数指定
+        let action3 = UNNotificationAction(identifier: "action3",
+                                           title: "title3",
+                                           options: [.authenticationRequired, .destructive])
+        if #available(iOS 11.0, *) {
+            let category = UNNotificationCategory(identifier: "category1",
+                                                  actions: [action1, action2, action3],
+                                                  intentIdentifiers: [],
+                                                  options: [])
+            notificationCenter.setNotificationCategories([category])
+        } else {
+            // Fallback on earlier versions
+        }
+//        let category = UNNotificationCategory(identifier: <#T##String#>,
+//                                              actions: <#T##[UNNotificationAction]#>,
+//                                              intentIdentifiers: <#T##[String]#>,
+//                                              hiddenPreviewsBodyPlaceholder: <#T##String#>,
+//                                              options: <#T##UNNotificationCategoryOptions#>)
+    }
 }
 
 extension RemoteNotificationManager: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-
-        logger.info("applicationState: \(UIApplication.shared.applicationState)")
-        let content = response.notification.request.content
-        logger.info("content: \(content)")
+        let actionIdentifier = response.actionIdentifier
+        if actionIdentifier == UNNotificationDefaultActionIdentifier {
+            logger.info("通常の通知バナータップ")
+        } else if actionIdentifier == UNNotificationDismissActionIdentifier {
+            logger.info("通知バナーが閉じられた")
+        } else if actionIdentifier == "category1" {
+            logger.info("自分で定義したカテゴリー(\(actionIdentifier))")
+        } else {
+            logger.default("想定しないカテゴリー(\(actionIdentifier))")
+        }
         switch UIApplication.shared.applicationState {
         case .inactive:
-            logger.info("A: アプリを閉じたがまだterminatedになっていない状態から通知経由で起動 or D: Terminatedから通知経由で起動")
+            logger.info("アプリを閉じた状態で`foreground`オプション有りのアクション実行")
         case .active:
-            logger.info("C: アプリを開いた状態で通知バナータップ")
+            logger.info("アプリを開いた状態でアクション実行")
         case .background:
-            logger.info("アクション付き通知でバッググラウンド実行された際などに到達(後述)")
+            logger.info("アプリを閉じた状態で`foreground`オプション無しのアクション実行")
+            logger.info("backgroundTimeRemaining: \(application.backgroundTimeRemaining)")
         }
         completionHandler()
-
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         assert(UIApplication.shared.applicationState == .active, "active(アプリを開いている状態)でしか呼ばれないはず")
-        do {
-            let myPayload = try MyPayload(userInfo: notification.request.content.userInfo)
-            logger.debug(myPayload)
-        } catch let e {
-            logger.error(e)
-        }
         logger.info("applicationState: \(UIApplication.shared.applicationState)")
         let content = notification.request.content
         logger.info("content: \(content)")

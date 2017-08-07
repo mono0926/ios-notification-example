@@ -89,7 +89,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         case .active:
             logger.info("C: アプリを開いた状態で通知バナータップ")
         case .background:
-            logger.fault("到達しないはず")
+            logger.info("アクション付き通知でバッググラウンド実行された際などに到達(後述)")
         }
         completionHandler()
     }
